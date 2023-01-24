@@ -3,6 +3,7 @@ package com.api.tweeteroapi.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import com.api.tweeteroapi.model.UserModel;
 import com.api.tweeteroapi.services.UserService;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/sign-up")
 public class UserController {
     @Autowired
