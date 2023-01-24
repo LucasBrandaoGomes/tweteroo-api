@@ -25,7 +25,7 @@ import com.api.tweeteroapi.services.TweetService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/tweets")
+@RequestMapping("/api/tweets")
 public class TweetController {
     
     @Autowired TweetService service;
