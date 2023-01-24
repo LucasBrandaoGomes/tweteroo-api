@@ -1,7 +1,5 @@
 package com.api.tweeteroapi.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +17,4 @@ public class UserService {
         repository.save(new UserModel(dto));
     }
 
-    public List<UserModel> findall(){
-        return repository.findAll();
-    }
 }
