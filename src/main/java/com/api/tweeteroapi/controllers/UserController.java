@@ -16,7 +16,7 @@ import com.api.tweeteroapi.services.UserService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/sign-up")
+@RequestMapping("/api/auth/sign-up")
 public class UserController {
     @Autowired
     private UserService service;
