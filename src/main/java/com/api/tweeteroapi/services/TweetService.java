@@ -25,14 +25,13 @@ public class TweetService {
 
     public void save(String username, TweetDTO dto) {
         Optional<UserModel> user = userRepository.findByUsername(username);
-
         if(user.isPresent()) {
             tweetRepository.save(new TweetModel(dto, username, user.get().getPictureUrl()));
         }
     }
 
-    public Page<TweetModel> getTweets(Pageable page) {
-        return tweetRepository.findAllByOrderByIdDesc(page);
+    public List<TweetModel> getTweets(Pageable page) {
+        return tweetRepository.findAll(page).getContent();
     }
 
     public List<TweetModel> getUsersTweets(String username) {

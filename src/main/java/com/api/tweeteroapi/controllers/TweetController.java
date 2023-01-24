@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,26 +26,24 @@ import com.api.tweeteroapi.services.TweetService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/tweets")
+@RequestMapping("/api")
 public class TweetController {
     
     @Autowired TweetService service;
 
-    @PostMapping
+    @PostMapping("/tweets")
     public ResponseEntity<Void> create(@RequestHeader("User") String username, @RequestBody TweetDTO req){
         service.save(username, req);
-
+        System.out.println(req); 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public Page<TweetModel> getFiveTweets(@RequestParam String page){
-        int pageNumber = Integer.parseInt(page);
-        Pageable sortedById = PageRequest.of(pageNumber, 5, Sort.by("id").descending());
-        return service.getTweets(sortedById);
+    @GetMapping("/tweets")
+    public List<TweetModel> list(@PageableDefault(sort = "id", direction = Sort.Direction.DESC  ,page = 0, size = 5 ) Pageable page) {
+       return service.getTweets(page);
     }
 
-    @GetMapping("/username")
+    @GetMapping("/tweets/{username}")
     public List<TweetModel> getAllUserTweets(@PathVariable String username){
         return service.getUsersTweets(username);
     }
