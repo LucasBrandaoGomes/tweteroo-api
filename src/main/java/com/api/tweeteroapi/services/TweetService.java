@@ -24,9 +24,14 @@ public class TweetService {
 
     public void save(String username, TweetDTO dto) {
         Optional<UserModel> user = userRepository.findByUsername(username);
-        if(user.isPresent()) {
-            tweetRepository.save(new TweetModel(dto, username, user.get().getPictureUrl()));
+
+        if (user.isEmpty()) {
+            System.out.println("Usuario não encontrado");
+            return;
         }
+        
+        tweetRepository.save(new TweetModel(dto, username, user.get().getPictureUrl()));
+        
     }
 
     public List<TweetModel> getTweets(Pageable page) {
