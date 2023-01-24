@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,9 +31,9 @@ public class TweetController {
     @Autowired TweetService service;
 
     @PostMapping("/tweets")
-    public ResponseEntity<Void> create(@RequestHeader("User") String username, @RequestBody TweetDTO req){
+    public ResponseEntity<Void> create(@RequestHeader("User") String username, @RequestBody @Valid TweetDTO req){
         service.save(username, req);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/tweets")
