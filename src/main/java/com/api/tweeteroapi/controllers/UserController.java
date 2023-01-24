@@ -22,7 +22,7 @@ public class UserController {
     private UserService service;
 
     @PostMapping("/auth/sign-up")
-    public ResponseEntity<Object> create(@RequestBody @Valid UserDTO req){
+    public ResponseEntity<Void> create(@RequestBody @Valid UserDTO req){
         service.save(req);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
