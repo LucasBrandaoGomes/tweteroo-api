@@ -19,7 +19,4 @@ public class UserService {
         repository.save(new UserModel(dto));
     }
 
-    public List<UserModel> findall(){
-        return repository.findAll();
-    }
 }
