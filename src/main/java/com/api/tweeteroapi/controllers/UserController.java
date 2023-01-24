@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.tweeteroapi.dto.UserDTO;
 import com.api.tweeteroapi.services.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/auth/sign-up")
@@ -18,7 +20,7 @@ public class UserController {
     private UserService service;
 
     @PostMapping
-    public String create(@RequestBody UserDTO req){
+    public String create(@RequestBody @Valid UserDTO req){
         service.save(req);
         return "OK";
     }

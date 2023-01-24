@@ -21,6 +21,8 @@ import com.api.tweeteroapi.dto.TweetDTO;
 import com.api.tweeteroapi.model.TweetModel;
 import com.api.tweeteroapi.services.TweetService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api")
@@ -29,7 +31,7 @@ public class TweetController {
     @Autowired TweetService service;
 
     @PostMapping("/tweets")
-    public ResponseEntity<Void> create(@RequestHeader("User") String username, @RequestBody TweetDTO req){
+    public ResponseEntity<Void> create(@RequestHeader("User") String username, @RequestBody @Valid TweetDTO req){
         service.save(username, req);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
